@@ -4,10 +4,7 @@
 # https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # App config
-appsettings*.json
 
-# App config
-appsettings*.json
 
 # Bitbucket pipeline
 bitbucket-pipelines.yml
