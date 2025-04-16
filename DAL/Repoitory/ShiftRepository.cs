@@ -14,12 +14,12 @@ namespace DAL.Repoitory
 
         public async Task<List<ShiftEntity>> GetAsync(long userID, int year, int month)
         {
-            var searchDate = new DateTime(year, month, 1);
+            var searchDate = new DateOnly(year, month, 1);
             var nextDate = searchDate.AddMonths(1);
             return await GetByDatesAsync(userID, searchDate, nextDate);
         }
 
-        public async Task<ShiftEntity?> GetAsync(long userID, DateTime date)
+        public async Task<ShiftEntity?> GetAsync(long userID, DateOnly date)
         {
             var nextDate = date.AddDays(1);
             var res = await GetByDatesAsync(userID, date, nextDate);
@@ -52,11 +52,11 @@ namespace DAL.Repoitory
             await _db.SaveChangesAsync();   
         }
 
-        private async Task<List<ShiftEntity>> GetByDatesAsync(long userID, DateTime searchDate, DateTime nextDate)
+        private async Task<List<ShiftEntity>> GetByDatesAsync(long userID, DateOnly searchDate, DateOnly nextDate)
         {
             return await _db.Shift
                 .Include(sh => sh.ShiftPauses.OrderBy(p => p.Start))
-                .Where(sh => sh.UserID == userID && sh.ShiftDate >= searchDate.ToUniversalTime() && sh.ShiftDate < nextDate.ToUniversalTime())
+                .Where(sh => sh.UserID == userID && sh.ShiftDate >= searchDate && sh.ShiftDate < nextDate)
                 .OrderBy(sh => sh.ShiftDate)
                 .ToListAsync();
         }

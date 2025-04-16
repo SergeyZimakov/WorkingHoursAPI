@@ -11,7 +11,7 @@ namespace Core.Entity.Shift
         public long ShiftID { get; set; }
         public long? DayTypeID { get; set; }
         public long UserID { get; set; }
-        public DateTime ShiftDate { get; set; }
+        public DateOnly ShiftDate { get; set; }
         [Column(TypeName = "timestamp without time zone")]
         public DateTime Start { get; set; }
         [Column(TypeName = "timestamp without time zone")]

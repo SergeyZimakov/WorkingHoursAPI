@@ -28,11 +28,11 @@ namespace BLL.Manager
             _mapper = mapper;
         }
 
-        public async Task<CommonContentDTO<CurrentBalanceView>> GetCurrentBalanceAsync(long userID, DateTimeView requestView)
+        public async Task<CommonContentDTO<CurrentBalanceView>> GetCurrentBalanceAsync(long userID, int year, int month)
         {
             var res = new CommonContentDTO<CurrentBalanceView>();
 
-            var shifts = await _shiftRepository.GetAsync(userID, requestView.Date.Year, requestView.Date.Month);
+            var shifts = await _shiftRepository.GetAsync(userID, year, month);
             var dayTypes = await _dayTypeRepository.GetDayTypesByUserAsync(userID);
 
             res.Status = CustomResponseStatus.OK;
@@ -40,11 +40,11 @@ namespace BLL.Manager
             return res;
         }
 
-        public async Task<CommonContentDTO<GetShiftView>> GetDailyDataAsync (long userID, DateTimeView requestView)
+        public async Task<CommonContentDTO<GetShiftView>> GetDailyDataAsync (long userID, DateOnly date)
         {
             var res = new CommonContentDTO<GetShiftView>();
 
-            var shift = await _shiftRepository.GetAsync(userID, requestView.Date);
+            var shift = await _shiftRepository.GetAsync(userID, date);
             if (shift == null)
             {
                 res.Status = CustomResponseStatus.NoContent;
@@ -174,7 +174,8 @@ namespace BLL.Manager
         {
             var res = new CommonDTO();
 
-            var entity = await _shiftRepository.GetAsync(userID, requestView.Date);
+            var shiftDate = DateOnly.FromDateTime(requestView.Date);
+            var entity = await _shiftRepository.GetAsync(userID, shiftDate);
             if (entity != null)
             {
                 res.Status = CustomResponseStatus.BadRequest;
@@ -186,8 +187,8 @@ namespace BLL.Manager
             {
                 UserID = userID,
                 DayTypeID = requestView.DayTypeID,
-                ShiftDate = requestView.Date.ToUniversalTime(),
-                Start = requestView.Date.ToUniversalTime(),
+                ShiftDate = shiftDate,
+                Start = requestView.Date,
                 Stop = null,
                 ShiftPauses = new List<ShiftPauseEntity>()
             });

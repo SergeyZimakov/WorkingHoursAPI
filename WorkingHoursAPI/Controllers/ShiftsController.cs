@@ -18,26 +18,26 @@ namespace WorkingHoursAPI.Controllers
         }
 
         [HttpGet]
-        [Route("")]
-        public async Task<IActionResult> GetDailyDataAsync(DateTimeView requestView)
+        [Route("daily")]
+        public async Task<IActionResult> GetDailyDataAsync([FromQuery] DateOnly date)
         {
             var user = this.GetUser();
-            var dto = await _manager.GetDailyDataAsync(user.UserID, requestView);
+            var dto = await _manager.GetDailyDataAsync(user.UserID, date);
             return this.CreateResponse(dto);
         }
 
         [HttpGet]
         [Route("balance")]
-        public async Task<IActionResult> GetCurrentBalanceAsync(DateTimeView requestView)
+        public async Task<IActionResult> GetCurrentBalanceAsync([FromQuery] int year, [FromQuery] int month)
         {
             var user = this.GetUser();
-            var dto = await _manager.GetCurrentBalanceAsync(user.UserID, requestView);
+            var dto = await _manager.GetCurrentBalanceAsync(user.UserID, year, month);
             return this.CreateResponse(dto);
         }
 
         [HttpGet]
-        [Route("year/{year}/month/{month}")]
-        public async Task<IActionResult> GetMonthlyDataAsync(int year, int month)
+        [Route("monthly")]
+        public async Task<IActionResult> GetMonthlyDataAsync([FromQuery]  int year, [FromQuery]  int month)
         {
             var user = this.GetUser();
             var dto = await _manager.GetMonthlyDataAsync(user.UserID, year, month);
