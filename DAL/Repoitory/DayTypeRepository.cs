@@ -1,9 +1,10 @@
 ﻿using Core.Entity.DayType;
+using Core.Interface.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repoitory
 {
-    public class DayTypeRepository
+    public class DayTypeRepository : IDayTypeRepository
     {
         private readonly EntityDbContext _db;
         public DayTypeRepository(EntityDbContext db)
