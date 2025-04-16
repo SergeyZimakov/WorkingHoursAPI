@@ -149,7 +149,7 @@ namespace BLL.Manager
             if (entity.UserID != userID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
                 return res;
             }
 
@@ -178,7 +178,7 @@ namespace BLL.Manager
             if (entity != null)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.StartShiftError;
+                res.View.Message = ShiftConsts.ShiftAlreadyHasBeenStarted;
                 return res;
             }
 
@@ -193,7 +193,7 @@ namespace BLL.Manager
             });
 
             res.Status = CustomResponseStatus.OK;
-            res.View.Message = ShiftConsts.StartShiftSuccess;
+            res.View.Message = ShiftConsts.ShiftHasBeenStarted;
             return res;
         }
 
@@ -205,14 +205,14 @@ namespace BLL.Manager
             if (entity == null)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.StopShiftError;
+                res.View.Message = ShiftConsts.ShiftHasNotBeenStarted;
                 return res;
             }
 
             if (entity.UserID != userID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
                 return res;
             }
 
@@ -235,7 +235,7 @@ namespace BLL.Manager
             await _shiftRepository.UpdateAsync(entity);
 
             res.Status = CustomResponseStatus.OK;
-            res.View.Message = ShiftConsts.StopShiftSuccess;
+            res.View.Message = ShiftConsts.ShiftHasBeenStopped;
             return res;
         }
 
@@ -247,14 +247,21 @@ namespace BLL.Manager
             if (entity == null)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.StartShiftError;
+                res.View.Message = ShiftConsts.ShiftHasNotBeenStarted;
                 return res;
             }
 
             if (entity.UserID != userID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
+                return res;
+            }
+
+            if (entity.Stop.HasValue)
+            {
+                res.Status = CustomResponseStatus.BadRequest;
+                res.View.Message = ShiftConsts.ShiftHasBeenStopped;
                 return res;
             }
 
@@ -271,7 +278,7 @@ namespace BLL.Manager
             await _shiftRepository.UpdateAsync(entity);
 
             res.Status = CustomResponseStatus.OK;
-            res.View.Message = ShiftConsts.StartPauseSuccess;
+            res.View.Message = ShiftConsts.PauseHasBeenStarted;
             return res;
         }
 
@@ -283,14 +290,21 @@ namespace BLL.Manager
             if (entity == null)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.StartShiftError;
+                res.View.Message = ShiftConsts.ShiftHasNotBeenStarted;
                 return res;
             }
 
             if (entity.UserID != userID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
+                return res;
+            }
+
+            if (entity.Stop.HasValue)
+            {
+                res.Status = CustomResponseStatus.BadRequest;
+                res.View.Message = ShiftConsts.ShiftHasBeenStopped;
                 return res;
             }
 
@@ -298,7 +312,7 @@ namespace BLL.Manager
             if (lastPause == null || lastPause.Stop.HasValue)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.StopPauseError;
+                res.View.Message = ShiftConsts.PauseHasNotBeenStarted;
                 return res;
             }
 
@@ -315,7 +329,7 @@ namespace BLL.Manager
             await _shiftRepository.UpdateAsync(entity);
 
             res.Status = CustomResponseStatus.OK;
-            res.View.Message = ShiftConsts.StopPauseSuccess;
+            res.View.Message = ShiftConsts.PauseHasBeenStopped;
             return res;
         }
 
@@ -327,7 +341,7 @@ namespace BLL.Manager
             if (entity == null || entity.UserID != userID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = ShiftConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
                 return res;
             }
 

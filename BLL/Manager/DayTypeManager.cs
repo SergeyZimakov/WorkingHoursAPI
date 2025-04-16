@@ -84,7 +84,7 @@ namespace BLL.Manager
             if (userID != dayTypeModel.UserID)
             {
                 res.Status = CustomResponseStatus.BadRequest;
-                res.View.Message = DayTypeConsts.UserError;
+                res.View.Message = GeneralConsts.PermissionsError;
                 return res;
             }
 

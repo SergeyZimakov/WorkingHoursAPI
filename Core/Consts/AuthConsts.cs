@@ -2,8 +2,8 @@
 {
     public class AuthConsts
     {
-        public const string WrongLoginOrPassword = "Wrong Login Or Password";
-        public const string RegisterSuccess = "Congrats For Sign Up";
-        public const string LoginAlreadyExists = "Login Already Exists";
+        public const string WrongLoginOrPassword = "WrongLoginOrPassword";
+        public const string RegisterSuccess = "CongratsForSignUp";
+        public const string LoginAlreadyExists = "LoginAlreadyExists";
     }
 }
