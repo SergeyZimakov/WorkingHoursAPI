@@ -1,9 +1,10 @@
 ﻿using Core.Entity.Shift;
+using Core.Interface.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repoitory
 {
-    public class ShiftRepository
+    public class ShiftRepository : IShiftRepository
     {
         private readonly EntityDbContext _db;
         public ShiftRepository(EntityDbContext db)

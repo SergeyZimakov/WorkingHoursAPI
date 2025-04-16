@@ -1,9 +1,10 @@
 ﻿using Core.Entity.Auth;
+using Core.Interface.Repository;
 using Microsoft.EntityFrameworkCore;
 
 namespace DAL.Repoitory
 {
-    public class UserRepoitory
+    public class UserRepoitory : IUserRepository
     {
         private readonly EntityDbContext _db;
         public UserRepoitory(EntityDbContext db)

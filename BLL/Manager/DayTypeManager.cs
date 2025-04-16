@@ -2,23 +2,22 @@
 using Core.Consts;
 using Core.DTO;
 using Core.Entity.DayType;
+using Core.Interface.Repository;
 using Core.Service;
 using Core.View.DayType;
-using DAL;
-using DAL.Repoitory;
 
 namespace BLL.Manager
 {
     public class DayTypeManager
     {
-        private readonly DayTypeRepository _dayTypeRepository;
+        private readonly IDayTypeRepository _dayTypeRepository;
         private readonly ValidationService _validationService;
         private readonly IMapper _mapper;
-        public DayTypeManager(EntityDbContext context,
+        public DayTypeManager(IDayTypeRepository dayTypeRepository,
             ValidationService validationService,
             IMapper mapper)
         {
-            _dayTypeRepository = new DayTypeRepository(context);
+            _dayTypeRepository = dayTypeRepository;
             _validationService = validationService;
             _mapper = mapper;
         }

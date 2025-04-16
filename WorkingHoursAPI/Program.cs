@@ -1,8 +1,9 @@
 using BLL.Manager;
+using Core.Interface.Repository;
 using Core.Service;
 using DAL;
+using DAL.Repoitory;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -38,6 +39,10 @@ builder.Services.AddTransient<DayTypeManager>();
 builder.Services.AddTransient<ShiftsManager>();
 
 builder.Services.AddTransient<ValidationService>();
+
+builder.Services.AddTransient<IUserRepository, UserRepoitory>();
+builder.Services.AddTransient<IDayTypeRepository, DayTypeRepository>();
+builder.Services.AddTransient<IShiftRepository, ShiftRepository>();
 
 builder.Services.AddAutoMapper(typeof(AuthManager));
 builder.Services.AddAutoMapper(typeof(DayTypeMapper));

@@ -2,19 +2,18 @@
 using Core.Consts;
 using Core.DTO;
 using Core.Entity.Auth;
+using Core.Interface.Repository;
 using Core.View.Auth;
-using DAL;
-using DAL.Repoitory;
 
 namespace BLL.Manager
 {
     public class AuthManager
     {
-        private readonly UserRepoitory _userRepoitory;
+        private readonly IUserRepository _userRepoitory;
         private readonly IMapper _mapper;
-        public AuthManager(EntityDbContext dbContext, IMapper mapper)
+        public AuthManager(IUserRepository userRepoitory, IMapper mapper)
         {
-            _userRepoitory = new UserRepoitory(dbContext);
+            _userRepoitory = userRepoitory;
             _mapper = mapper;
         }
         public async Task<UserDTO?> LoginAsync(LoginView requestView)
