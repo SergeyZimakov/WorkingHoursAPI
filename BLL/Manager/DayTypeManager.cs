@@ -5,8 +5,6 @@ using Core.Entity.DayType;
 using Core.Interface.Repository;
 using Core.Service;
 using Core.View.DayType;
-using DAL;
-using DAL.Repoitory;
 
 namespace BLL.Manager
 {

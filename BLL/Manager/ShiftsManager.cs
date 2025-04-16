@@ -3,25 +3,27 @@ using Core.Consts;
 using Core.DTO;
 using Core.Helper;
 using Core.Entity.Shift;
-using DAL;
-using DAL.Repoitory;
 using Core.View.Shift;
 using Core.Model.WorkRecord;
 using Core.View.Statistics;
 using Core.Service;
+using Core.Interface.Repository;
 
 namespace BLL.Manager
 {
     public class ShiftsManager
     {
-        private ShiftRepository _shiftRepository;
-        private DayTypeRepository _dayTypeRepository;
-        private ValidationService _validationService;
-        private IMapper _mapper;
-        public ShiftsManager(EntityDbContext context, ValidationService validationService, IMapper mapper)
+        private readonly IShiftRepository _shiftRepository;
+        private readonly IDayTypeRepository _dayTypeRepository;
+        private readonly ValidationService _validationService;
+        private readonly IMapper _mapper;
+        public ShiftsManager(IShiftRepository shiftRepository,
+            IDayTypeRepository dayTypeRepository,
+            ValidationService validationService, 
+            IMapper mapper)
         {
-            _shiftRepository = new ShiftRepository(context);
-            _dayTypeRepository = new DayTypeRepository(context);
+            _shiftRepository = shiftRepository;
+            _dayTypeRepository = dayTypeRepository;
             _validationService = validationService;
             _mapper = mapper;
         }
