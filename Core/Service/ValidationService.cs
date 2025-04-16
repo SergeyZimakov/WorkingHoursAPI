@@ -21,7 +21,7 @@ namespace Core.Service
             {
                 if (IsOverlapped(shift.ShiftPauses.Select(p => (p.Start, p.Stop)).ToList()))
                 {
-                    validationResult.ErrorMessage = ShiftConsts.OverlappingError;
+                    validationResult.ErrorMessage = ShiftConsts.TimeError;
                     return validationResult;
                 }
 
@@ -29,7 +29,7 @@ namespace Core.Service
 
                 if (shift.Stop.HasValue && !lastPause.Stop.HasValue)
                 {
-                    validationResult.ErrorMessage = ShiftConsts.NotStoppedPauseError;
+                    validationResult.ErrorMessage = ShiftConsts.TimeError;
                     return validationResult;
                 }
 
@@ -47,13 +47,13 @@ namespace Core.Service
 
                 if (shift.ShiftPauses.Any(p => p.Start < shift.Start))
                 {
-                    validationResult.ErrorMessage = ShiftConsts.PauseBeforeStartError;
+                    validationResult.ErrorMessage = ShiftConsts.TimeError;
                     return validationResult;
                 }
 
                 if (shift.ShiftPauses.Any(p => p.Stop > shift.Stop))
                 {
-                    validationResult.ErrorMessage = ShiftConsts.PauseAfterStopError;
+                    validationResult.ErrorMessage = ShiftConsts.TimeError;
                     return validationResult;
                 }
             }

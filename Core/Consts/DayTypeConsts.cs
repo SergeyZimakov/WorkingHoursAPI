@@ -2,15 +2,14 @@
 {
     public class DayTypeConsts
     {
-        public const string AdditionaHoursOrderError = "Each additional hours record should have unique order number";
-        public const string BreakTimeError = "Break time can not be greater then shift time";
-        public const string NotFoundError = "Error. The day type was not found in data base";
-        public const string UserError = "This user is not avaliable to upate this day type";
-        public const string NotExistingError = "Some of declared day types not exist";
+        public const string AdditionaHoursOrderError = "EachAdditionalHoursRecordShouldHaveUniqueOrderNumber";
+        public const string BreakTimeError = "BreakTimeCanNotBeGreaterThenShiftTime";
+        public const string NotFoundError = "DayTypeWasNotFoundInDataBase";
+        public const string NotExistingError = "SomeOfDeclaredDayTypesDoesNotExist";
 
-        public const string AddSuccess = "Day type was added successfully";
-        public const string UpdateSuccess = "Day type was updated successfully";
-        public const string DeleteSuccess = "Day type was deleted successfully";
+        public const string AddSuccess = "DayTypeWasAddedSuccessfully";
+        public const string UpdateSuccess = "DayTypeWasUpdatedSuccessfully";
+        public const string DeleteSuccess = "DayTypeWasDeletedSuccessfully";
 
         public const string DefaultDayTypeName = "Standart";
         public const string DefaultDayTypeColor = "transparent";
